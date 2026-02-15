@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="uk" class="no-js">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Кафе-Бар Романтика | Смачні обіди та Мангал</title>
+    <meta name="description" content="Затишний заклад у Тернополі. Комплексні обіди, страви з мангалу та банкетне меню.">
+    <meta name="theme-color" content="#1a1a1a">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- НАЛАШТУВАННЯ --- */
+        :root {
+            --primary: #1a1a1a;
+            --accent: #c5a059;      /* Золотий відтінок */
+            --accent-dark: #b08d4b;
+            --bg-light: #f9f9f9;
+            --bg-white: #ffffff;
+            --text-main: #2c2c2c;
+            --text-muted: #666666;
+            --border: #e2e2e2;
+            --shadow: 0 10px 30px rgba(0,0,0,0.06);
+            --radius: 12px;
+            --font-main: 'Manrope', sans-serif;
+            --font-serif: 'Playfair Display', serif;
+        }
+
+        /* --- БАЗА --- */
+        * { box-sizing: border-box; }
+        body { margin: 0; padding: 0; font-family: var(--font-main); background: var(--bg-light); color: var(--text-main); line-height: 1.5; }
+        h1, h2, h3, h4 { margin: 0; font-family: var(--font-serif); color: var(--primary); font-weight: 700; }
+        button { cursor: pointer; border: none; background: none; font-family: inherit; padding: 0; }
+        img { display: block; max-width: 100%; height: auto; object-fit: cover; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        input, textarea { font-family: inherit; }
+
+        /* --- HEADER --- */
+        .header {
+            position: sticky; top: 0; z-index: 999; height: 70px;
+            background: rgba(255,255,255,0.95); backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--border);
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 5%;
+        }
+        .logo { font-family: var(--font-serif); font-size: 22px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .logo span { color: var(--accent); }
+        
+        .header-actions { display: flex; align-items: center; gap: 15px; }
+        
+        /* Кнопка профілю */
+        .profile-btn { display: flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 700; color: var(--text-main); padding: 8px 16px; border-radius: 50px; border: 1px solid var(--border); transition: 0.3s; }
+        .profile-btn:hover { background: var(--bg-light); border-color: var(--text-main); }
+        .profile-icon { width: 20px; height: 20px; }
+
+        .cart-wrap { position: relative; cursor: pointer; }
+        .cart-icon { width: 28px; height: 28px; color: var(--primary); transition: 0.3s; }
+        .cart-wrap:hover .cart-icon { color: var(--accent); transform: scale(1.1); }
+        .cart-badge { position: absolute; top: -5px; right: -5px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; min-width: 18px; height: 18px; border-radius: 50%; display: flex; align-items: center; justify-content: center; opacity: 0; transition: 0.3s; border: 2px solid #fff; }
+        .cart-badge.active { opacity: 1; }
+
+        /* --- HERO --- */
+        .hero { height: 500px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; color: #fff; padding: 20px; background: #000; overflow: hidden; }
+        .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0.6; transition: 5s transform; }
+        .hero:hover .hero-bg { transform: scale(1.05); }
+        .hero h1 { font-size: 46px; margin-bottom: 15px; z-index: 2; color: #fff; text-shadow: 0 2px 15px rgba(0,0,0,0.5); }
+        .hero p { font-size: 18px; max-width: 600px; z-index: 2; opacity: 0.9; margin-bottom: 30px; }
+        .hero-btn { background: var(--accent); color: #fff; padding: 14px 35px; border-radius: 50px; font-weight: 700; text-transform: uppercase; font-size: 14px; letter-spacing: 1px; z-index: 2; transition: 0.3s; box-shadow: 0 4px 15px rgba(197, 160, 89, 0.4); }
+        .hero-btn:hover { background: #fff; color: #000; transform: translateY(-3px); }
+
+        /* --- ABOUT SECTION --- */
+        .about-section { padding: 60px 5%; max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 50px; align-items: center; }
+        .about-text h2 { font-size: 36px; margin-bottom: 20px; line-height: 1.2; }
+        .about-text p { color: var(--text-muted); margin-bottom: 20px; font-size: 16px; line-height: 1.6; }
+        .about-img { border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); }
+        .about-stat { display: flex; gap: 30px; margin-top: 30px; }
+        .stat-item h4 { font-size: 28px; color: var(--accent); margin-bottom: 5px; }
+        .stat-item span { font-size: 13px; font-weight: 600; text-transform: uppercase; color: var(--text-muted); }
+
+        /* --- NAV --- */
+        .nav-sticky { position: sticky; top: 70px; z-index: 900; background: var(--bg-white); border-bottom: 1px solid var(--border); padding: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .nav-list { display: flex; gap: 10px; overflow-x: auto; padding: 0 5%; scrollbar-width: none; }
+        .nav-list::-webkit-scrollbar { display: none; }
+        .nav-btn { white-space: nowrap; padding: 8px 20px; border-radius: 50px; border: 1px solid var(--border); font-size: 13px; font-weight: 700; text-transform: uppercase; color: var(--text-main); transition: 0.3s; background: var(--bg-light); }
+        .nav-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .nav-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        /* --- MENU GRID --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 5%; }
+        .cat-title { font-size: 28px; margin: 50px 0 25px; padding-bottom: 10px; border-bottom: 2px solid var(--accent); display: inline-block; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; }
+
+        .card { background: var(--bg-white); border-radius: 12px; overflow: hidden; border: 1px solid transparent; transition: 0.3s; display: flex; flex-direction: column; height: 100%; position: relative; }
+        .card:hover { transform: translateY(-5px); box-shadow: var(--shadow); border-color: rgba(0,0,0,0.05); }
+        .card-img-wrap { position: relative; padding-top: 65%; background: #eee; }
+        .card-img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transition: 0.5s; }
+        .card:hover .card-img { transform: scale(1.08); }
+        .badge { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-size: 10px; font-weight: 800; padding: 4px 10px; border-radius: 4px; z-index: 2; box-shadow: 0 2px 10px rgba(0,0,0,0.15); }
+        
+        .card-body { padding: 18px; flex: 1; display: flex; flex-direction: column; }
+        .card-title { font-size: 17px; font-weight: 700; margin-bottom: 8px; line-height: 1.3; }
+        .card-desc { font-size: 13px; color: var(--text-muted); margin-bottom: 12px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; flex-grow: 1; }
+        .card-meta { font-size: 12px; color: #999; margin-top: auto; display: flex; align-items: center; gap: 5px; font-weight: 500; }
+        
+        .card-foot { margin-top: 15px; padding-top: 15px; border-top: 1px solid #f0f0f0; display: flex; justify-content: space-between; align-items: center; }
+        .price { font-size: 18px; font-weight: 800; color: var(--primary); }
+        .add-btn { width: 38px; height: 38px; border-radius: 50%; background: var(--bg-light); border: 1px solid var(--border); color: var(--primary); display: flex; align-items: center; justify-content: center; transition: 0.2s; }
+        .add-btn:hover { background: var(--primary); color: #fff; border-color: var(--primary); }
+
+        /* --- REVIEWS --- */
+        .reviews-wrap { margin-top: 40px; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .review-card { background: #fff; padding: 25px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.04); border: 1px solid var(--border); }
+        .r-header { display: flex; align-items: center; gap: 12px; margin-bottom: 15px; }
+        .r-avatar { width: 40px; height: 40px; background: var(--accent); color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; }
+        .r-info h5 { margin: 0; font-size: 15px; font-family: var(--font-main); }
+        .r-date { font-size: 11px; color: #999; }
+        .r-stars { color: #f1c40f; font-size: 14px; margin-top: 3px; }
+        .r-text { font-size: 14px; color: #555; font-style: italic; line-height: 1.6; }
+
+        /* --- SIDEBAR --- */
+        .backdrop { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(3px); z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; }
+        .backdrop.active { opacity: 1; pointer-events: all; }
+        
+        .sidebar { position: fixed; top: 0; right: 0; bottom: 0; width: 100%; max-width: 420px; background: #fff; z-index: 1010; transform: translateX(100%); transition: 0.4s cubic-bezier(0.2, 1, 0.3, 1); display: flex; flex-direction: column; }
+        .sidebar.active { transform: translateX(0); }
+        .s-head { padding: 20px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+        .s-title { font-size: 20px; font-weight: 700; }
+        .s-content { flex: 1; overflow-y: auto; padding: 20px; background: var(--bg-light); }
+        .s-foot { padding: 20px; background: #fff; border-top: 1px solid var(--border); }
+
+        /* --- FORMS & CART --- */
+        .form-group { margin-bottom: 15px; }
+        .form-label { font-size: 12px; font-weight: 700; text-transform: uppercase; margin-bottom: 5px; display: block; color: var(--text-muted); }
+        .inp { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 15px; }
+        .inp:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.1); }
+        
+        .btn-main { width: 100%; padding: 15px; background: var(--primary); color: #fff; font-weight: 700; text-transform: uppercase; border-radius: 8px; transition: 0.3s; }
+        .btn-main:hover { background: var(--accent); }
+
+        .c-item { display: flex; gap: 12px; padding: 12px; background: #fff; border-radius: 8px; margin-bottom: 10px; border: 1px solid #eee; }
+        .c-img { width: 60px; height: 60px; border-radius: 6px; object-fit: cover; }
+        .c-info { flex: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .c-row { display: flex; justify-content: space-between; align-items: center; }
+        .c-name { font-weight: 700; font-size: 14px; }
+        .c-calc { font-size: 12px; color: #888; }
+        .qty-ctrl { display: flex; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; }
+        .qty-btn { width: 24px; height: 24px; background: #f5f5f5; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+        .qty-val { width: 24px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; }
+
+        /* --- MOBILE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 32px; }
+            .about-section { grid-template-columns: 1fr; padding: 40px 5%; text-align: center; }
+            .about-stat { justify-content: center; }
+            .logo span:last-child { display: none; } /* Short logo on mobile */
+        }
+    </style>
+</head>
+<body>
+
+<svg style="display: none;">
+    <symbol id="icon-user" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+    <symbol id="icon-cart" viewBox="0 0 24 24"><path d="M9 20a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm7 0a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-8-3h8a1 1 0 0 0 1-1V9H8v7a1 1 0 0 0 1 1zm9-10V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2H5v2h14V7h-2zm-6-2h4v2h-4V5z" fill="currentColor"/></symbol>
+</svg>
+
+<header class="header">
+    <a href="#" class="logo">Роман<span>тика</span></a>
+    
+    <div class="header-actions">
+        <button class="profile-btn" onclick="user.openModal()">
+            <svg class="profile-icon"><use href="#icon-user"></use></svg>
+            <span id="headerUserName">Увійти</span>
+        </button>
+
+        <div class="cart-wrap" onclick="app.toggleSidebar('cart')">
+            <svg class="cart-icon"><use href="#icon-cart"></use></svg>
+            <div class="cart-badge" id="cartBadge">0</div>
+        </div>
+    </div>
+</header>
+
+<section class="hero">
+    <img src="https://images.unsplash.com/photo-1544025162-d76690b6d029?w=1600" class="hero-bg" alt="Стейк">
+    <h1>Справжня українська гостинність</h1>
+    <p>Комплексні обіди, страви з мангалу та затишна атмосфера. <br>Доставка по Тернополю.</p>
+    <button class="hero-btn" onclick="app.scrollToMenu()">Переглянути меню</button>
+</section>
+
+<section class="about-section" id="about">
+    <div class="about-text">
+        <h2>Традиції смаку <br>та затишку</h2>
+        <p>Кафе-бар "Романтика" — це місце, де зустрічаються класичні рецепти української кухні та майстерність приготування м'яса на вогні. Ми працюємо для того, щоб кожен гість відчув себе як вдома.</p>
+        <p>Свіжі продукти, великі порції та любов до своєї справи — ось наш секрет успіху вже понад 10 років.</p>
+        <div class="about-stat">
+            <div class="stat-item"><h4>10+</h4><span>Років роботи</span></div>
+            <div class="stat-item"><h4>50+</h4><span>М'ясних страв</span></div>
+            <div class="stat-item"><h4>4.9</h4><span>Рейтинг Google</span></div>
+        </div>
+    </div>
+    <div class="about-img">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800" alt="Інтер'єр">
+    </div>
+</section>
+
+<div class="nav-sticky">
+    <div class="nav-list" id="navRender"></div>
+</div>
+
+<main class="container" id="menuContainer">
+    <div id="menuRender"></div>
+
+    <div class="cat-title" style="margin-top: 80px;">Відгуки наших гостей</div>
+    <div class="reviews-wrap" id="reviewsRender"></div>
+    <div style="text-align: center; margin-top: 30px;">
+        <button class="btn-main" style="width: auto; padding: 12px 30px;" onclick="app.toggleSidebar('review')">Залишити відгук</button>
+    </div>
+</main>
+
+<div class="backdrop" id="backdrop" onclick="app.closeAll()"></div>
+
+<aside class="sidebar" id="sidebarCart">
+    <div class="s-head">
+        <span class="s-title">Ваше замовлення</span>
+        <button onclick="app.closeAll()">✕</button>
+    </div>
+    <div class="s-content">
+        <div id="cartItems"></div>
+        
+        <div id="checkoutForm" style="margin-top: 30px; display: none;">
+            <h4 style="margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Оформлення</h4>
+            <div class="form-group">
+                <label class="form-label">Ім'я</label>
+                <input class="inp" id="orderName" placeholder="Введіть ваше ім'я">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Телефон</label>
+                <input class="inp" id="orderPhone" type="tel" placeholder="067 000 00 00">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Адреса доставки</label>
+                <textarea class="inp" id="orderAddr" rows="2" placeholder="Вулиця, будинок..."></textarea>
+            </div>
+        </div>
+    </div>
+    <div class="s-foot" id="cartFoot" style="display: none;">
+        <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 18px; margin-bottom: 15px;">
+            <span>Разом:</span>
+            <span id="cartTotal">0 ₴</span>
+        </div>
+        <button class="btn-main" onclick="app.submitOrder()">Підтвердити замовлення</button>
+    </div>
+</aside>
+
+<aside class="sidebar" id="sidebarAuth">
+    <div class="s-head">
+        <span class="s-title">Особистий кабінет</span>
+        <button onclick="app.closeAll()">✕</button>
+    </div>
+    <div class="s-content">
+        <div id="authForm">
+            <p style="color: #666; margin-bottom: 20px;">Увійдіть або зареєструйтесь, щоб ми запам'ятали ваші дані для швидкого замовлення.</p>
+            <div class="form-group">
+                <label class="form-label">Ваше ім'я</label>
+                <input class="inp" id="regName" placeholder="Ім'я">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Номер телефону</label>
+                <input class="inp" id="regPhone" type="tel" placeholder="+380...">
+            </div>
+            <button class="btn-main" onclick="user.login()">Зберегти та Увійти</button>
+        </div>
+        <div id="authProfile" style="display: none; text-align: center;">
+            <div style="width: 80px; height: 80px; background: var(--accent); color: #fff; font-size: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; font-weight: 700;" id="profileAvatar">A</div>
+            <h3 id="profileName" style="margin-bottom: 5px;">User</h3>
+            <p id="profilePhone" style="color: #666;">Phone</p>
+            <button class="btn-main" style="background: #e74c3c; margin-top: 20px;" onclick="user.logout()">Вийти з акаунту</button>
+        </div>
+    </div>
+</aside>
+
+<aside class="sidebar" id="sidebarReview">
+    <div class="s-head">
+        <span class="s-title">Новий відгук</span>
+        <button onclick="app.closeAll()">✕</button>
+    </div>
+    <div class="s-content">
+        <div class="form-group"><label class="form-label">Ім'я</label><input class="inp" id="rName"></div>
+        <div class="form-group"><label class="form-label">Оцінка (1-5)</label><input class="inp" type="number" id="rStars" min="1" max="5" value="5"></div>
+        <div class="form-group"><label class="form-label">Відгук</label><textarea class="inp" id="rText" rows="4"></textarea></div>
+        <button class="btn-main" onclick="app.submitReview()">Опублікувати</button>
+    </div>
+</aside>
+
+<script>
+    // --- ДАНІ БОТА (ВСТАВТЕ СВОЇ) ---
+    const CONFIG = { TOKEN: "ВАШ_ТОКЕН", CHAT: "ВАШ_CHAT_ID" };
+
+    // --- МЕНЮ (З КОМПЛЕКСНИМИ ТА М'ЯСОМ) ---
+    const MENU = [
+        {
+            id: "lunch", title: "Комплексні обіди", imgBase: "https://images.unsplash.com/photo-1543353071-87d8928ddbcc?w=500",
+            desc: "Вигідна пропозиція! Щодня з 12:00 до 16:00.",
+            items: [
+                {id:901, n:"Ланч №1 (Борщ)", p:120, w:"450г", d:"Борщ червоний, пюре, котлета домашня, салат з капусти, хліб.", b:"ТОП"},
+                {id:902, n:"Ланч №2 (Суп)", p:110, w:"450г", d:"Суп з фрикадельками, рис з овочами, відбивна куряча, салат.", b:"ОБІД"}
+            ]
+        },
+        {
+            id: "grill", title: "Страви з мангалу", imgBase: "https://images.unsplash.com/photo-1594041680534-e8c8cdebd659?w=500",
+            items: [
+                {id:601, n:"Шашлик свинний", p:200, w:"170г", d:"Маринований у цибулі та травах.", b:"ХІТ"},
+                {id:602, n:"Стейк з ошийка", p:95, w:"100г", d:"Соковитий шматок м'яса з димком."},
+                {id:603, n:"Ребра з полядвицею", p:90, w:"100г", d:"Фірмові реберця від шефа."},
+                {id:604, n:"Скумбрія гриль", p:90, w:"100г", d:"Ціла риба з лимоном."},
+                {id:605, n:"Овочі гриль", p:130, w:"200г", d:"Баклажан, перець, томат, гриби."}
+            ]
+        },
+        {
+            id: "hot", title: "Гарячі страви", imgBase: "https://images.unsplash.com/photo-1604908176997-125f25cc6f3d?w=500",
+            items: [
+                {id:301, n:"Язик з грибами", p:200, w:"250г", d:"Тушкований у вершках."},
+                {id:302, n:"Жульєн класичний", p:180, w:"250г", d:"Курка, гриби, сирна скоринка."},
+                {id:303, n:"Відбивна свинна", p:80, w:"120г", d:"У яєчному клярі."},
+                {id:304, n:"Деруни зі сметаною", p:90, w:"150г", d:"Традиційні українські деруни."}
+            ]
+        },
+        {
+            id: "salads", title: "Салати", imgBase: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500",
+            items: [
+                {id:201, n:"Цезар з куркою", p:200, w:"220г", d:"Мікс салату, пармезан, грінки.", b:"ХІТ"},
+                {id:202, n:"Грецький", p:180, w:"250г", d:"Фета, оливки, свіжі овочі."},
+                {id:203, n:"Дністер", p:100, w:"200г", d:"Капуста, ковбаса, майонез."}
+            ]
+        },
+        {
+            id: "soup", title: "Перші страви", imgBase: "https://images.unsplash.com/photo-1547592166-23acbe346499?w=500",
+            items: [
+                {id:501, n:"Борщ український", p:85, w:"400г", d:"Подається зі сметаною.", b:"ХІТ"},
+                {id:502, n:"Бограч", p:140, w:"400г", d:"Гострий закарпатський суп."}
+            ]
+        },
+        {
+            id: "cold", title: "Закуски", imgBase: "https://images.unsplash.com/photo-1541529086526-db283c563270?w=500",
+            items: [
+                {id:101, n:"Сало з часником", p:90, w:"100/10г", d:"З чорним хлібом."},
+                {id:102, n:"Оселедець з цибулею", p:90, w:"100г", d:"Слабосолений."},
+                {id:103, n:"М'ясна нарізка", p:150, w:"200г", d:"Домашня ковбаса, шинка."}
+            ]
+        },
+        {
+            id: "drinks", title: "Напої", imgBase: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?w=500",
+            items: [
+                {id:801, n:"Узвар домашній", p:25, w:"250мл", d:"Власне виробництво."},
+                {id:802, n:"Пиво Опілля", p:60, w:"0.5л", d:"Живе пиво."}
+            ]
+        }
+    ];
+
+    // --- КЛАС КОРИСТУВАЧА ---
+    class UserAuth {
+        constructor() {
+            this.data = JSON.parse(localStorage.getItem('romantyka_user')) || null;
+            this.updateHeader();
+        }
+
+        openModal() {
+            if (this.data) {
+                // Показуємо профіль
+                document.getElementById('authForm').style.display = 'none';
+                document.getElementById('authProfile').style.display = 'block';
+                document.getElementById('profileName').innerText = this.data.name;
+                document.getElementById('profilePhone').innerText = this.data.phone;
+                document.getElementById('profileAvatar').innerText = this.data.name[0].toUpperCase();
+            } else {
+                // Показуємо форму входу
+                document.getElementById('authForm').style.display = 'block';
+                document.getElementById('authProfile').style.display = 'none';
+            }
+            app.toggleSidebar('auth');
+        }
+
+        login() {
+            const name = document.getElementById('regName').value;
+            const phone = document.getElementById('regPhone').value;
+            if (!name || !phone) return alert("Введіть ім'я та телефон");
+
+            this.data = { name, phone };
+            localStorage.setItem('romantyka_user', JSON.stringify(this.data));
+            this.updateHeader();
+            app.closeAll();
+            alert(`Вітаємо, ${name}! Акаунт створено.`);
+        }
+
+        logout() {
+            localStorage.removeItem('romantyka_user');
+            this.data = null;
+            this.updateHeader();
+            app.closeAll();
+        }
+
+        updateHeader() {
+            const el = document.getElementById('headerUserName');
+            el.innerText = this.data ? this.data.name : "Увійти";
+        }
+    }
+
+    // --- ГОЛОВНИЙ ДОДАТОК ---
+    class App {
+        constructor() {
+            this.cart = [];
+            // ВАШІ ВІДГУКИ ТУТ
+            this.reviews = JSON.parse(localStorage.getItem('reviews')) || [
+                {name:"Вікторія", stars:5, text:"Святкували день народження. Кухня неймовірна, особливо шашлик!"},
+                {name:"Олег", stars:5, text:"Комплексні обіди дуже ситні. Борщ як у мами."},
+                {name:"Андрій", stars:4, text:"Все сподобалось, доставка швидка."}
+            ];
+            this.init();
+        }
+
+        init() {
+            this.renderNav();
+            this.renderMenu();
+            this.renderReviews();
+        }
+
+        // Рендер кнопок навігації
+        renderNav() {
+            document.getElementById('navRender').innerHTML = MENU.map((s, i) => 
+                `<button class="nav-btn ${i===0?'active':''}" onclick="app.scroll('${s.id}', this)">${s.title}</button>`
+            ).join('');
+        }
+
+        // Рендер карток меню
+        renderMenu() {
+            document.getElementById('menuRender').innerHTML = MENU.map(s => `
+                <div id="${s.id}" class="cat-title">${s.title}</div>
+                ${s.desc ? `<p style="color:#666; margin-bottom:20px; background:#fff3cd; padding:10px; border-radius:6px; display:inline-block;">${s.desc}</p>` : ''}
+                <div class="grid">
+                    ${s.items.map(i => `
+                    <div class="card">
+                        ${i.b ? `<div class="badge">${i.b}</div>` : ''}
+                        <div class="card-img-wrap"><img src="${s.imgBase}" class="card-img" loading="lazy"></div>
+                        <div class="card-body">
+                            <div class="card-title">${i.n}</div>
+                            <div class="card-desc">${i.d}</div>
+                            <div class="card-meta">Вага: ${i.w}</div>
+                            <div class="card-foot">
+                                <div class="price">${i.p} ₴</div>
+                                <button class="add-btn" onclick="app.addToCart(${i.id})">+</button>
+                            </div>
+                        </div>
+                    </div>
+                    `).join('')}
+                </div>
+            `).join('');
+        }
+
+        // Рендер відгуків
+        renderReviews() {
+            document.getElementById('reviewsRender').innerHTML = this.reviews.map(r => `
+                <div class="review-card">
+                    <div class="r-header">
+                        <div class="r-avatar">${r.name[0]}</div>
+                        <div class="r-info">
+                            <h5>${r.name}</h5>
+                            <div class="r-stars">${'★'.repeat(r.stars)}</div>
+                        </div>
+                    </div>
+                    <div class="r-text">"${r.text}"</div>
+                </div>
+            `).join('');
+        }
+
+        scroll(id, btn) {
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const el = document.getElementById(id);
+            const offset = 130;
+            const top = el.getBoundingClientRect().top + window.pageYOffset - offset;
+            window.scrollTo({top: top, behavior: 'smooth'});
+        }
+
+        scrollToMenu() {
+            document.getElementById('navRender').scrollIntoView({behavior:'smooth'});
+        }
+
+        // --- ЛОГІКА КОШИКА ---
+        addToCart(id) {
+            let item = this.cart.find(i => i.id === id);
+            if(item) {
+                item.q++;
+            } else {
+                for(let cat of MENU) {
+                    let found = cat.items.find(i => i.id === id);
+                    if(found) {
+                        this.cart.push({...found, q: 1});
+                        break;
+                    }
+                }
+            }
+            this.updateCartUI();
+            this.toggleSidebar('cart');
+        }
+
+        updateCartUI() {
+            // Оновлення бейджа
+            const count = this.cart.reduce((a, b) => a + b.q, 0);
+            const badge = document.getElementById('cartBadge');
+            badge.innerText = count;
+            badge.classList.toggle('active', count > 0);
+
+            // Оновлення списку
+            const container = document.getElementById('cartItems');
+            const totalEl = document.getElementById('cartTotal');
+            
+            if(this.cart.length === 0) {
+                container.innerHTML = '<div style="text-align:center; padding:40px; color:#999;">Кошик порожній</div>';
+                document.getElementById('checkoutForm').style.display = 'none';
+                document.getElementById('cartFoot').style.display = 'none';
+                return;
+            }
+
+            let totalPrice = 0;
+            container.innerHTML = this.cart.map(i => {
+                totalPrice += i.p * i.q;
+                let img = "";
+                for(let c of MENU) { if(c.items.find(x=>x.id===i.id)) img = c.imgBase; }
+
+                return `
+                <div class="c-item">
+                    <img src="${img}" class="c-img">
+                    <div class="c-info">
+                        <div class="c-row">
+                            <span class="c-name">${i.n}</span>
+                            <span style="font-weight:700">${i.p * i.q} ₴</span>
+                        </div>
+                        <div class="c-row">
+                            <span class="c-calc">${i.p} ₴ x ${i.q} шт</span>
+                            <div class="qty-ctrl">
+                                <button class="qty-btn" onclick="app.changeQty(${i.id}, -1)">-</button>
+                                <span class="qty-val">${i.q}</span>
+                                <button class="qty-btn" onclick="app.changeQty(${i.id}, 1)">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }).join('');
+
+            totalEl.innerText = totalPrice + ' ₴';
+            document.getElementById('checkoutForm').style.display = 'block';
+            document.getElementById('cartFoot').style.display = 'block';
+
+            // Автозаповнення полів, якщо юзер залогінений
+            if(user.data) {
+                document.getElementById('orderName').value = user.data.name;
+                document.getElementById('orderPhone').value = user.data.phone;
+            }
+        }
+
+        changeQty(id, diff) {
+            let item = this.cart.find(i => i.id === id);
+            item.q += diff;
+            if(item.q <= 0) this.cart = this.cart.filter(i => i.id !== id);
+            this.updateCartUI();
+        }
+
+        toggleSidebar(type) {
+            this.closeAll();
+            const backdrop = document.getElementById('backdrop');
+            
+            if(type === 'cart') {
+                backdrop.classList.add('active');
+                document.getElementById('sidebarCart').classList.add('active');
+            } else if(type === 'auth') {
+                backdrop.classList.add('active');
+                document.getElementById('sidebarAuth').classList.add('active');
+            } else if(type === 'review') {
+                backdrop.classList.add('active');
+                document.getElementById('sidebarReview').classList.add('active');
+            }
+        }
+
+        closeAll() {
+            document.getElementById('backdrop').classList.remove('active');
+            document.querySelectorAll('.sidebar').forEach(s => s.classList.remove('active'));
+        }
+
+        async submitOrder() {
+            const name = document.getElementById('orderName').value;
+            const phone = document.getElementById('orderPhone').value;
+            const addr = document.getElementById('orderAddr').value;
+            
+            if(!name || !phone) return alert("Будь ласка, введіть ім'я та телефон.");
+
+            let msg = `🔥 *НОВЕ ЗАМОВЛЕННЯ*\n👤 ${name}\n📞 ${phone}\n📍 ${addr || 'Самовивіз'}\n\n`;
+            this.cart.forEach(i => msg += `▫️ ${i.n} (${i.q} шт) = ${i.p * i.q} ₴\n`);
+            msg += `\n💰 *ВСЬОГО: ${document.getElementById('cartTotal').innerText}*`;
+
+            try {
+                await fetch(`https://api.telegram.org/bot${CONFIG.TOKEN}/sendMessage`, {
+                    method:'POST', headers:{'Content-Type':'application/json'},
+                    body:JSON.stringify({chat_id:CONFIG.CHAT, text:msg, parse_mode:'Markdown'})
+                });
+                alert('Дякуємо! Замовлення прийнято.');
+                this.cart = []; this.updateCartUI(); this.closeAll();
+            } catch(e) { alert('Помилка відправки. Зателефонуйте нам.'); }
+        }
+
+        submitReview() {
+            const n = document.getElementById('rName').value;
+            const s = document.getElementById('rStars').value;
+            const t = document.getElementById('rText').value;
+            if(!n || !t) return alert('Заповніть всі поля');
+            
+            this.reviews.unshift({name:n, stars:parseInt(s), text:t});
+            localStorage.setItem('reviews', JSON.stringify(this.reviews));
+            this.renderReviews();
+            this.closeAll();
+        }
+    }
+
+    const user = new UserAuth();
+    const app = new App();
+</script>
+</body>
+</html>
